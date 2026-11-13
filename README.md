@@ -15,6 +15,41 @@ The final LightGBM model was trained on January 2019 to June 2020 and evaluated 
 (!) The data is **simulated** and its fraud patterns are regular, so a real fraud system would score far lower.
 The value of this project is the method.
 
+## Objective
+
+![pipeline](reports/figures/fraud_pipeline.png)
+
+- **Problem** → about 1 in 200 card payments is fraud, and a fraud team can only review so many alerts a day
+- **Why this repo** → rank every payment by fraud risk using only what the bank knew *at that moment*, then pick the alert threshold from the cost of a review, not from accuracy
+- **Real-world use** → an alert queue: the riskiest payments go to an analyst (or trigger an SMS check) first; the threshold slider trades missed fraud against analyst workload
+
+## Highlights
+
+**Question:** does the card's own history matter more than the payment itself?
+
+**Answer:** yes. Without past-only card history (count and amount in the last 1 h / 24 h / 7 d, time since the last payment), PR-AUC falls from 0.982 to 0.917 and recall from 0.94 to 0.82. Fraud shows up as a *burst*, not as one strange payment.
+
+![SHAP summary](reports/figures/05_shap_summary.png)
+
+**Question:** where should the alert threshold be?
+
+**Answer:** at 0.02, not at the F1-optimal 0.37: with a $10 review cost, catching one more fraud is worth many false alarms. That gives about 14 alerts a day and catches 98.8 % of fraud dollars.
+
+![cost threshold](reports/figures/05_cost_threshold.png)
+
+**Question:** what does the model still miss, and does it hold up over time?
+
+**Answer:** cheap fraud and holiday spending. 50 of the 65 missed frauds are under $200 (recall ≥ 98.6 % above $200); precision drops to 0.66 in December when normal spending looks unusual.
+
+| Test, Jun - Dec 2020 | Value |
+|---|---|
+| Missed frauds | 65, of which 50 under $200 |
+| Recall above $200 | ≥ 98.6 % |
+| Precision, December vs other months | 0.66 vs 0.75-0.82 |
+
+![stability](reports/figures/05_stability.png)
+
+
 ## Problem
 
 About 0.5 % of transactions are fraud, so accuracy is useless: a model that never flags anything scores 99.4 %.
