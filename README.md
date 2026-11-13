@@ -95,3 +95,12 @@ pip install -r requirements.txt
 ```
 
 Notebook 04 takes about 50 minutes on a 12-core CPU; the others take a few minutes each.
+
+## Run on Kaggle
+
+[`kaggle/ml-binaryclassification-credit-card-transactions-fraud-detection.ipynb`](kaggle/ml-binaryclassification-credit-card-transactions-fraud-detection.ipynb) is notebooks 01 to 05 in one file, with `src/` written to disk in its first cells.
+
+1. Kaggle → Create → **Import Notebook** → upload the file (or paste its GitHub URL)
+2. **Add Input** → dataset `kartik2112/fraud-detection`
+3. Settings → Internet **On** (installs `optuna`, `imbalanced-learn`) → CPU is enough
+4. Run All → outputs land in `/kaggle/working` (`data/processed/`, `models/`, `reports/`)
