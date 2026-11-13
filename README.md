@@ -101,6 +101,6 @@ Notebook 04 takes about 50 minutes on a 12-core CPU; the others take a few minut
 [`kaggle/ml-binaryclassification-credit-card-transactions-fraud-detection.ipynb`](kaggle/ml-binaryclassification-credit-card-transactions-fraud-detection.ipynb) is a self-contained copy of notebooks 01 to 05 for Kaggle: one file, settings in the top cell, helper functions inline, no `src/` and no repo files needed.
 
 1. Kaggle → Create → **Import Notebook** → upload the file (or paste its GitHub URL)
-2. **Add Input** → dataset `kartik2112/fraud-detection`
-3. Settings → Internet **On** (installs `optuna`, `imbalanced-learn`) → CPU is enough
-4. Run All → outputs land in `/kaggle/working` (`data/processed/`, `models/`, `reports/`)
+2. **Input** → dataset `kartik2112/fraud-detection`, attached automatically on import (otherwise Add Input)
+3. Settings → Internet off is fine (every library is preinstalled on Kaggle) → CPU is enough
+4. Run All → everything stays in memory; nothing is written unless `SAVE_FIGURES = True` (charts → `/kaggle/working/figures`)
