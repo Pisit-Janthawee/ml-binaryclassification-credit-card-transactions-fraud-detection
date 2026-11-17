@@ -79,6 +79,12 @@ kaggle datasets download -d kartik2112/fraud-detection -p data/raw --unzip
 The fast rolling features were verified against a brute-force recomputation (200 random transactions, 0 mismatches).
 Data is split by time: train to 2020-03-20, validation to 2020-06-21, test to 2020-12-31.
 
+**Main formulas, part by part.** The Kaggle notebook takes the central formulas apart piece by piece: the logistic model and its log loss, Gini, the boosting update, class weights, precision / recall / PR-AUC, the cost threshold and the past-only window sum.
+Two parts explain the results here. In the log loss, a fraud scored 0.001 costs 6.91 while one scored 0.75 costs 0.29, and without class weights legit rows carry 99.42 % of the loss.
+In the cost, every missed fraud costs its own amount (often \$300-1,100) against \$10 per review, which is why the alert line drops to 0.02.
+
+![log loss and class weights](assets/m_log_loss.png)
+
 ## Results
 
 Validation PR-AUC of the main experiments:
