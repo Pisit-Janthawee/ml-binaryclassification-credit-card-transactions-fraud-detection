@@ -83,7 +83,7 @@ Data is split by time: train to 2020-03-20, validation to 2020-06-21, test to 20
 Two parts explain the results here. In the log loss, a fraud scored 0.001 costs 6.91 while one scored 0.75 costs 0.29, and without class weights legit rows carry 99.42 % of the loss.
 In the cost, every missed fraud costs its own amount (often \$300-1,100) against \$10 per review, which is why the alert line drops to 0.02.
 
-![log loss and class weights](assets/m_log_loss.png)
+![log loss and class weights](assets/png/m_log_loss.png)
 
 ## Results
 
